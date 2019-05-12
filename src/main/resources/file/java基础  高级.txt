@@ -1,0 +1,165 @@
+﻿.LOG
+1、java基础  高级
+	(a)、并发编程  推荐书籍(《并发编程实战》)
+		基础
+			(1)、并发编程基础
+			(2)、线程安全
+			(3)、多个线程多个锁
+			(4)、线程同步异步
+			(5)、业务脏读
+			(6)、voliatile和atomic关键字
+			(7)、线程之间的通信
+			(8)、阻塞Queue
+			(9)、ThreadLocal和单例
+		中级
+			(10)、同步类容器
+			(11)、并发类容器 ConcurrentMap 、CopyOnWrite、Queue
+			(12)、Future模式、MasterWorker模式
+			(13)、生产消费者模式
+		高级
+			(14)、多任务线程框架
+			(15)、自定义线程池
+			(16)、Executors框架
+		jdk8 新特性
+            (1)、Lambda表达式：lambda表达式允许将函数作为一个方法的参数(函数作为参数传递给方法)
+                代码demo见：com.jdk8.lambda.Test01
+                特征：
+                    1、可选类型声名：不需要声明参数类型，编译器可以识别参数值
+                    2、可选参数园括号：一个参数不需要定义园括号，多个参数需要定义园括号
+                    3、可选大括号：如果主体中包含一个语句，就不需要使用大括号
+                    4、可选返回关键字：如果主体只有一个表达式返回值则编译器自动返回，大括号需要指明表达式返回了一个数值。
+            (2)、方法引用：方法引用是通过方法的名字来指向一个方法 方法引用使用一对冒号 ::   简单的说 就是lambda表达式
+                    1、构造器引用 Class::new 或 Class<T>::new
+                    2、静态方法引用 Class::static_method
+                    3、特定类的任意对象的方法引用  Class::method
+                    4、特定的对象的方法引用  instance::method
+            (3)、默认方法
+                    默认方法就是 接口可以有一个实现方法，而不需要其实现类去实现此方法。 我们只需要在这个方法前面加一个default即可。
+                        为什么会有默认方法：面向接口是双刃剑，面向接口是抽象而不是具体编程，缺陷是 当需要修改接口的时候，需要修改全部实现改接口的类，
+                        所以引入默认方法，来解决接口的修改与实现的不兼容
+            (4)、函数式接口
+                    函数式接口(Function Interface) 就是有且仅有一个抽象方法，可以有多个非抽象方法的接口
+                    函数式接口可以隐式的转换位lambda表达式
+            (5)、Stream API
+                        jdk8 提出的新的抽象概念--流Stream 可以让你使用一声明的方式处理数据
+                        Stream 使用一种类似用 SQL 语句从数据库查询数据的直观方式来提供一种对 Java 集合运算和表达的高阶抽象
+                        Stream API 可以极大提高Java程序员的生产力，让程序员写出高效率、干净、简洁的代码
+                        这种风格将要处理的元素集合看作一种流， 流在管道中传输， 并且可以在管道的节点上进行处理， 比如筛选， 排序，聚合等
+                        元素流在管道中经过中间操作（intermediate operation）的处理，最后由最终操作(terminal operation)得到前面处理的结果
+                     什么是Stream   Stream是来自数据源的一个元素队列并支出聚合操作，
+                        1、元素是特定类型的对象，形成一个队列。java中的Stream并不会存储元素，*而是按需计算*。
+                        2、数据源 流的来源。可以是聚合，数组，I/O channel，产生器generator等
+                        3、聚合操作，类似SQL语句的操作一样， 比如filter, map, reduce, find, match, sorted等、
+                     和以前的Collection操作不同，Stream操作有两个基本特征：
+                        1、Pipelining：中间操作都会返回流对象本身，这样多个操作可以串成一个管道，如同流式风格（fluent style）。 这样做可以对操作进行优化， 比如延迟执行(laziness)和短路( short-circuiting)
+                        2、内部迭代：以前对集合遍历都是通过Iterator或者For-Each的方式, 显式的在集合外部进行迭代， 这叫做外部迭代。 Stream提供了内部迭代的方式， 通过访问者模式(Visitor)实现
+                     生成流：
+                        jdk8中有两种方法生成流：
+                            1、stream() - 为集合创建串行流
+                            2、parallelStream() - 为集合创建并行流
+
+            (6)、DateTime API
+            (7)、Optional API
+            (8)、Nashorn、javascript 引擎
+
+	(b)、线程相关（线程池等）
+	(c)、数据库相关
+		*关系型数据库--mysql、oracle
+			mysql：两本书(1、《mysql必知必会》 2、《高性能mysql》)
+			oracle: (《oracle从入门到精通》)
+		*非关系型数据库--redis	(《redis实战》)
+			入门：
+			(1)、redis支持的数据类型以及操作命令
+			核心：
+			(2)、数据安全与性能保障
+				 (1)、持久化
+				 (2)、复制
+				 (3)、故障处理
+				 (4)、事务
+			(3)、集群的使用
+			(4)、构建应用
+			
+			进阶：
+			(5)、扩展
+	(d)、消息中间件mq--rabbitmq等  推荐书籍(《rabbitmq 实战指南》)
+		1、简介、入门、开发向导
+			开发向导：
+				1、连接rabbitmq
+				2、使用交换机和队列
+					交换机和队列是AMQP中的hight-level层面的构建模型，应用程序需要确保在使用他们的时候就已经存在了，在使用之前需要先申明(declare)它们。
+					申明交换机时有几个方法需要重点说明下
+					(a)、exchangeDeclare方法
+						exchangeDeclare(String exchange,String type,Boolean durable,Boolean autoDelete,boolean internal,Map<String,Object> arguments)
+						这个方法有多个重载方法，这些重载是由方法内部的参数的默认不同构成的，下面重点说下方法中的参数：
+						(1)、exchange: 交换机名称
+						(2)、type：交换机类型 有：direct,fanout,topic等等 详细后面再谈
+						(3)、durable:是否持久化 true标识持久化 反之亦然，持久化会将交换机存盘服务器重启不会丢失
+						(4)、autoDelete:是否自动删除 true表示会自动删除,自动删除前提是至少有一个队列或者交换机与这个交换机绑定,
+							之后 与这个交换机绑定的所有交换机或者队列将与此交换机解绑后这个交换机才会自动删除
+							(不能错误的理解为当与交换机链接的客户端断开时rabitmq会自动删除此交换机)
+						(5)、internal是否时内置的，true表示时内置的交换机此时客户端无法发送消息到这个交换机,只能通过交换机路由到交换机。
+						(6)、arguments：其他一些结构化参数
+					exchangeDeclare()的其他几个方法重载 参照源码查看
+					(b)、queueDeclare方法
+						queueDeclare() 这个发布一个队列相对来说重载的方法就比较少了 只有两个重载方法
+						queueDeclare();
+						queueDeclare(String queue,boolean durable,boolean exclusive,boolean autoDelete,Map<String,Object> arguments)
+
+						两个重载方法中 第一个不带任何参数的重载方法是默认创建一个有Rabbitmq命名的(这种队列也称之为匿名队列)队列,此中队列是排他的,自动删除的,非持久化的队列.
+						下面重点说一下申明队列时的参数
+							queue：队列名
+							durable：表示是否持久化，持久化的队列会存盘。
+							exservive：设置是否排他,如果一个队列被声明为排他,则该队列仅对"首次"声明他的链接可见,并在链接断开时自动删除，需注意：
+									1、排他队列是基于链接的(Connection)可见的,同一个链接的不同信道(channel) 是可以同时访问同一链接创建的排他队列 2、"首次"是指如果一个链接已经声明了一个排他队列，其他队列是不允许建立同名的排他队列,这个不同于普通队列
+									3、即使这个队列是持久化的,一旦链接断开或客户端退出,排他队列都会自动删除。
+									这种队列适用于一个客户端同时发送和读取消息的场景。
+							autoDelete：设置是否自动删除,删除的前提时至少有一个消费者连接到这个队列,之后所有与这个队列链接的消费者都断开			时,这个队列将自动删除
+							arguments:队列的其他参数
+					注意：生产者和消费者都能够使用queueDeclare来声明一个队列,但如果消费者在同一个信道上订阅了另外一个队列,就无法声明队列了,必须先取消订阅,然后将信道设置为"传输"模式之后才能声明队列。
+
+					对于queue和exchange的exchengeDeclareNoWait()和queuqDeclareNoWait() 方法 返回是void 就是声明之后 不需要服务器返回对应的exchange或者queue  具体见《rabbitmq实战指南》 P40页
+					(c)、queueBind方法 主要有三个方法
+						  queueBind(String queue,String exchange,String routingkey);
+						  queuqBind(String queue,String exchange,String routingkey,Map<String,Object> arguments);
+						  queuqBindNoWait(String queue,String exchange,String routingkey,Map<String,Object> arguments);
+						  参数：queuq：exchange：routingkey：arguments：
+						不仅可以将队列和交换机绑定,还可以将已经绑定的队列和交换机解绑 如下方法:
+						  queueUnbind(String queue,String exchange,String routingkey);
+						  queueUnbind(String queue,String exchange,String routingkey,Map<String,Object> arguments);
+					(d)、何时创建
+						 Rabbitmq的消息存储在队列中,交换机的使用并不真正耗费服务器性能,而队列会
+
+				3、发送消息
+
+				4、消费消息
+					推模式和拉模式
+				5、消费端的确认与拒绝
+				6、关闭链接
+		2、进阶
+		3、管理
+		4、配置
+		5、运维
+		6、高阶
+		
+	(e)、数据结构 算法	推荐书籍(《数据结构及算法》)
+		 1、算法(先了解几种常见算法)
+		 	几种常见算法(java实现)
+		 	(1)、插入排序 
+		 		 原理：从数组中，假设前面n-1个元素已经是排好序的,把第n个元素与前面排好序的数组中元素进行对比,找到准确的位置(第n个元素与排好序的数组中元素进行对比) 如此循环未排序的元素直至全部排序好。
+		 	(2)、希尔排序
+		 		 原理：希尔排序是插入排序的优化,递减增量排序
+		 		 		希尔排序是把记录按下标的一定增量分组,对每组使用直接插入排序算法,随着增量逐渐减少,每组包含的关键词越来越多，当增量减至1时，整个文件恰北分成一组，算法终止。
+		 	(3)、冒泡算法
+		 		 原理：一组数循环取一个元素,然后跟临近的元素进行比较，如果前面比后面的大则交换位置，反之不交换,针对所有元素重复		 以上操作，除了最后一个,直到排序完成。
+		 	(4)、快速排序
+		 		 原理：通过一趟排序将待排序记录分割成独立的两部分,其中一部分记录的关键字比零一部分关键字小，则可分别对这两部分		记录继续进行排序,以达到整个序列有序。
+		 		 描述：使用分治法来把一个串(list) 分为两个字串(sub-lists) 
+		 		 		1、从数列中跳出一个元素,称为“基准”
+		 		 		2、重新排序数列，所有比基准元素小的摆放到基准的前面,所有比基准大的元素摆放到基准元素的后面,（相同的可以放到任意一边）,在这个分区退出之后,该基准就处于数列的中间位置(这个成为分区操作)
+		 		 		3、递归的把小于基准值元素的子数列和大于基准值元素的子数列排序。	
+
+	(f)、jvm
+	(g)、spring、springboot、springcloud
+		(1)、spring
+		(2)、springboot
+		(3)、springcloud

@@ -1,0 +1,18 @@
+第二高薪水
+    获取表中第二高薪水 没有返回null
+    +----+--------+
+    | Id | Salary |
+    +----+--------+
+    | 1  | 100    |
+    | 2  | 200    |
+    | 3  | 300    |
+    +----+--------+
+
+    解： 思路 -- 先对工资进行排序 然后进行获取第二条数据 使用limit
+        SELECT salary FROM hello ORDER BY salary DESC LIMIT 1,1
+        limit  从第1条取 取一条  limit m,n m指记录开始的地方 m从0开始  n表示从m+1条开始  取n条
+        SELECT salary FROM hello ORDER BY salary DESC LIMIT 1 OFFSET 1
+        limit和offset结合使用  offset 是指从第1条开始读取  上句就是  取两条数据,offset从第一条取(索引从0开始)
+     如果没有则返回null
+     ifnull(express1,express2) 如果express1不为null则返回express1 否则返回express2
+
