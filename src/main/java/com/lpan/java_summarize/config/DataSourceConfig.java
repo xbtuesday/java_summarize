@@ -25,14 +25,15 @@ import javax.sql.DataSource;
  *
  */
 @Configuration
-@MapperScan(basePackages ={"com.lpan.java_summarize.*.mapper"},sqlSessionFactoryRef="sqlSessionFactoryBean" )
+/** 扫描mapper接口文件 */
+@MapperScan(basePackages ={"com.lpan.java_summarize.*.*.mapper"},sqlSessionFactoryRef="sqlSessionFactoryBean" )
 public class DataSourceConfig {
 
     private Logger logger = LoggerFactory.getLogger(DataSourceConfig.class);
 
 
     @Bean(name = "hikariDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource1")
+    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource(){
         return new HikariDataSource();
     }
@@ -47,9 +48,9 @@ public class DataSourceConfig {
             Interceptor[] interceptors = new Interceptor[]{paginationInterceptor};
             mybatisSqlSessionFactory.setPlugins(interceptors);
             mybatisSqlSessionFactory.setGlobalConfig(globalConfig);
-            //mybatisSqlSessionFactory.setTypeAliasesPackage("com.lpan.java_summarize.**.model");
+            mybatisSqlSessionFactory.setTypeAliasesPackage("com.lpan.java_summarize.common.**.model");
             mybatisSqlSessionFactory.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:spring/mybatis-config.xml"));
-            //mybatisSqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/**/*.xml"));
+            mybatisSqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/**/*.xml"));
             SqlSessionFactory sqlSessionFactory = mybatisSqlSessionFactory.getObject();
             return sqlSessionFactory;
         }catch (Exception e){
