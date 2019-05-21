@@ -1,4 +1,4 @@
-package com.lpan.java_summarize.jdk8.functionquote;
+package com.lpan.java_summarize.base.jdk8.functionquote;
 
 import java.util.ArrayList;
 import java.util.List;

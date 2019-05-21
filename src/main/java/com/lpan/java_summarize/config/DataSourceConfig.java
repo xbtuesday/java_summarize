@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
@@ -25,6 +26,7 @@ import javax.sql.DataSource;
  * 数据源配置类
  *
  */
+@EnableTransactionManagement
 @Configuration
 /** 扫描mapper接口文件 */
 @MapperScan(basePackages ={"com.lpan.java_summarize.*.*.mapper"},sqlSessionFactoryRef="sqlSessionFactoryBean" )
@@ -51,7 +53,7 @@ public class DataSourceConfig {
             Interceptor[] interceptors = new Interceptor[]{paginationInterceptor,performanceInterceptor};
             mybatisSqlSessionFactory.setPlugins(interceptors);
             mybatisSqlSessionFactory.setGlobalConfig(globalConfig);
-            mybatisSqlSessionFactory.setTypeAliasesPackage("com.lpan.java_summarize.common.**.model");
+            mybatisSqlSessionFactory.setTypeAliasesPackage("com.lpan.java_summarize.common.*.*.model");
             mybatisSqlSessionFactory.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:spring/mybatis-config.xml"));
             mybatisSqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/**/*.xml"));
             SqlSessionFactory sqlSessionFactory = mybatisSqlSessionFactory.getObject();

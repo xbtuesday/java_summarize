@@ -1,4 +1,4 @@
-package com.lpan.java_summarize.jdk8.stream;
+package com.lpan.java_summarize.base.jdk8.stream;
 
 public class User {
     private String name;

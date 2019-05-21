@@ -1,4 +1,4 @@
-package com.lpan.java_summarize.jdk8.lambda.package1;
+package com.lpan.java_summarize.base.jdk8.lambda.package1;
 
 public interface MyInterface {
 

@@ -1,4 +1,4 @@
-package com.lpan.java_summarize.jdk8.interfaces;
+package com.lpan.java_summarize.base.jdk8.interfaces;
 
 public class DefaultMethodTest1 implements DefaultMethod {
     @Override

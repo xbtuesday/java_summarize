@@ -1,11 +1,16 @@
 package com.lpan.java_summarize.common.user.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lpan.java_summarize.common.user.entity.User;
+import com.lpan.java_summarize.common.user.service.IUserService;
 import lombok.var;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -19,6 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController{
 
+    @Autowired
+    private IUserService userService;
+
     @RequestMapping("/add")
     public String adduser(){
         var user = new User();
@@ -28,6 +36,17 @@ public class UserController{
         user.setAddress("西安市");
         user.insert();
         return "success";
+    }
+
+    @RequestMapping("/list")
+    public String show(){
+        User user = new User();
+        user.setId(1);
+        /**添加查询条件*/
+        QueryWrapper queryWrapper = new QueryWrapper(user);
+        //queryWrapper.allEq()
+        List<User> list = userService.list(queryWrapper);
+        return list.toString();
     }
 
 }

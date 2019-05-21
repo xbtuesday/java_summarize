@@ -1,4 +1,4 @@
-package com.lpan.java_summarize.redis;
+package com.lpan.java_summarize.advance.redis;
 
 import java.lang.annotation.*;
 

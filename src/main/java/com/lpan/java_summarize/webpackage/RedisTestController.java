@@ -1,6 +1,6 @@
 package com.lpan.java_summarize.webpackage;
 
-import com.lpan.java_summarize.redis.RedisCacheUtils;
+import com.lpan.java_summarize.advance.redis.RedisCacheUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RedisTestController {
 
     @Autowired
-    private RedisCacheUtils  redisCacheUtils;
+    private RedisCacheUtils redisCacheUtils;
 
     @RequestMapping("/add")
     public void addtest(){

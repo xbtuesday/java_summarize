@@ -1,8 +1,8 @@
-package com.lpan.java_summarize.jdk8.lambda;
+package com.lpan.java_summarize.base.jdk8.lambda;
 
 
 
-import com.lpan.java_summarize.jdk8.lambda.package1.MyInterface;
+import com.lpan.java_summarize.base.jdk8.lambda.package1.MyInterface;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.lpan.java_summarize.mybatis;
+package com.lpan.java_summarize.advance.mybatis;
 
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
