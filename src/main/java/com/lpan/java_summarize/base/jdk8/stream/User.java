@@ -57,4 +57,8 @@ public class User {
                 ", sex='" + sex + '\'' +
                 '}';
     }
+
+    public void print() {
+        System.out.println("this is user class");
+    }
 }
