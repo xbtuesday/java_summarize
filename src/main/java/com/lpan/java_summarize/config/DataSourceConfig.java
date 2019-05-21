@@ -3,6 +3,7 @@ package com.lpan.java_summarize.config;
 
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.plugin.Interceptor;
@@ -41,11 +42,13 @@ public class DataSourceConfig {
     @Bean("sqlSessionFactoryBean")
     public SqlSessionFactory sqlSessionFactory(@Qualifier("hikariDataSource") DataSource dataSource,
                                                @Qualifier(value = "globalConfig")GlobalConfig globalConfig,
-                                               PaginationInterceptor paginationInterceptor){
+                                               PaginationInterceptor paginationInterceptor,
+                                               PerformanceInterceptor performanceInterceptor){
         try{
             MybatisSqlSessionFactoryBean mybatisSqlSessionFactory = new MybatisSqlSessionFactoryBean();
             mybatisSqlSessionFactory.setDataSource(dataSource);
-            Interceptor[] interceptors = new Interceptor[]{paginationInterceptor};
+            /** 分页插件 */
+            Interceptor[] interceptors = new Interceptor[]{paginationInterceptor,performanceInterceptor};
             mybatisSqlSessionFactory.setPlugins(interceptors);
             mybatisSqlSessionFactory.setGlobalConfig(globalConfig);
             mybatisSqlSessionFactory.setTypeAliasesPackage("com.lpan.java_summarize.common.**.model");

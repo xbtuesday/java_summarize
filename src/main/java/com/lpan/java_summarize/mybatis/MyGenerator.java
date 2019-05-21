@@ -14,6 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/***
+ * Description  逆向工程生成无聊代码
+ * @author lpan
+ * @date 19-5-20
+ * @date 下午5:04
+ * @param  * @param null
+ * @return
+ */
+
 public class MyGenerator {
 
     public static String scanner(String tip) {

@@ -17,6 +17,7 @@ import lombok.experimental.Accessors;
  *     现在仅仅需要让实现类继承Model<T> 类 且实现主键指定方法即可
  *     注意：实体类对应的接口mapper 中 需要UserDao extends BaseMapper<User>
  *          虽然AR模式用不到该接口，但是一定要定义，否则使用AR会报NullPointException
+ *      然后就可以 进行AR查询，删除，添加，更新 等操作
  *
  *    使用：
  *         User user = new User();
