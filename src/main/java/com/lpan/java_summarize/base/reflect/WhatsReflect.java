@@ -2,8 +2,11 @@ package com.lpan.java_summarize.base.reflect;
 
 import com.lpan.java_summarize.base.jdk8.stream.User;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /**
  * ClassName: WhatsReflect   什么是反射
@@ -39,7 +42,13 @@ public class WhatsReflect {
         //Introspection(new User());
         //reflect("com.lpan.java_summarize.base.jdk8.stream.User");
         //packageandclassname(new User());
-        createclass("com.lpan.java_summarize.base.jdk8.stream.User");
+        //createclass("com.lpan.java_summarize.base.jdk8.stream.User");
+        //createByconstructor("com.lpan.java_summarize.base.jdk8.stream.User");
+        //invorkmethodbyclass("com.lpan.java_summarize.base.jdk8.stream.User");
+        getparentinfo();
+        //invorkmethodbyreflect("com.lpan.java_summarize.base.jdk8.stream.User");
+        //getclassload("com.lpan.java_summarize.base.jdk8.stream.User");
+
     }
 
     /**内省   算符用于确定一个对象是否属于一个特定的类*/
@@ -117,5 +126,163 @@ public class WhatsReflect {
             e.printStackTrace();
         }
     }
+
+    /**通过Java反射机制得到一个类的构造函数，并实现创建带参实例对象*/
+    public static void createByconstructor(String str){
+        try {
+            Class<?> aClass = Class.forName(str);
+            /**得到所有构造函数集合*/
+            Constructor<?>[] constructors = aClass.getConstructors();
+            /**根据构造获得对象实例*/
+            User user = (User)constructors[0].newInstance();
+            user.setName("liu");
+            user.setAge("18");
+            Class<?> aClass1 = Class.forName(str);
+            Constructor<?>[] constructors1 = aClass1.getConstructors();
+            User span = (User) constructors1[1].newInstance("span", "19");
+            System.out.println("user one: name is " + user.getName() +" age is " + user.getAge());
+            System.out.println("user one: name is " + span.getName() +" age is " + span.getAge());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     *
+     * 根据反射获取类的属性与方法
+     *
+     * Field() fields() 获取类中定义的公有字段  能访问从其他类继承来的公有方法
+     * DeclaredField()  DeclaredFields()  获取类中定义的所有字段 与public，private protected 无关，不能访问从其他类集成来的属性
+     *
+     * */
+    public static void invorkmethodbyclass(String str){
+        try {
+            Class<?> aClass = Class.forName(str);
+            User user = new User();
+            user.setName("张三");
+            user.setAge("20");
+            user.setAddress("北京");
+            user.setPhone("12345678912");
+            user.setUsername("zs");
+            user.setBirthday("90");
+
+            /** 获取 类的字段*/
+            Field name = aClass.getField("username");
+            /**修改(设置)字段的值*/
+            name.set(user,"lisi");
+            /**获取字段的值*/
+            Object o = name.get(user);
+            System.out.println("username is :" + o);
+            /***/
+            Field[] fields = aClass.getFields();
+            Arrays.asList(fields).forEach(field -> {
+                System.out.println(field.getName());
+            });
+            /***/
+            Field[] declaredFields = aClass.getDeclaredFields();
+            Arrays.asList(declaredFields).forEach(declaredField->{
+                System.out.println(declaredField.getName() + "-----" + declaredField.getType());
+            });
+            /***/
+            Field age = aClass.getDeclaredField("age");
+            /**
+             *   setAccessible(boolean boolean) 方法：
+             *   在有setAccessible(true) 时  可以获取字段的值或修改字段的值
+             *   如果没有setAccessible(true)时获取和修改字段值会报错
+             *   明确一点： setAccessible(true)  并不是标识方法或字段能否被访问， public 方法的Accessible仍为false
+             *   Accessible 属性是继承AccessibleObject  功能是启用或禁用安全检查
+             *   值为true时 指示反射的对象在使用时取消java语言的访问检查
+             *   为false时 指示反射的对象在使用的时候需要进行java语言的访问检查
+             */
+            age.setAccessible(true);
+            age.set(user,"16");
+            Object o1 = age.get(user);
+            System.out.println("age is :" + o1);
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**过Java反射机制得到类的一些属性： 继承的接口，父类，函数信息，成员信息，类型等*/
+    public static void getparentinfo(){
+        String classstr = "com.lpan.java_summarize.common.user.entity.User";
+        try {
+            Class<?> aClass = Class.forName(classstr);
+            /**获取父类*/
+            Class<?> superclass = aClass.getSuperclass();
+            String name = superclass.getName();
+            /**父类字段*/
+            Field[] declaredFields = superclass.getDeclaredFields();
+            System.out.println(declaredFields.length);
+            System.out.println("父类名: " + name);
+            System.out.println("==========================================");
+
+            Class<?>[] interfaces = aClass.getInterfaces();
+            Class interfacec = interfaces[0];
+            String name1 = interfacec.getName();
+            System.out.println("实现的接口名称: " + name1);
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /** 通过Java反射机制调用类方法 */
+    public static void invorkmethodbyreflect(String str){
+        try {
+            Class<?> aClass = Class.forName(str);
+            User user = (User)aClass.newInstance();
+
+            /**调用公有方法*/
+            Method print = aClass.getDeclaredMethod("print");
+            Object invoke = print.invoke(user);
+            System.out.println(invoke);
+
+            /**调用私有方法*/
+            Method plusOne = aClass.getDeclaredMethod("plusOne", int.class);
+            plusOne.setAccessible(true);
+            Object invoke1 = plusOne.invoke(user, 2);
+            System.out.println(invoke1);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**获取类加载器*/
+    public static void getclassload(String str){
+        try {
+            Class<?> aClass = Class.forName(str);
+            /**获取类加载器*/
+            String name = aClass.getClassLoader().getClass().getName();
+            System.out.println(name);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
 
 }
