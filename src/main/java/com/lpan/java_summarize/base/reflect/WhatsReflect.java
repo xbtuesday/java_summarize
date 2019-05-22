@@ -1,6 +1,7 @@
 package com.lpan.java_summarize.base.reflect;
 
 import com.lpan.java_summarize.base.jdk8.stream.User;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -45,10 +46,10 @@ public class WhatsReflect {
         //createclass("com.lpan.java_summarize.base.jdk8.stream.User");
         //createByconstructor("com.lpan.java_summarize.base.jdk8.stream.User");
         //invorkmethodbyclass("com.lpan.java_summarize.base.jdk8.stream.User");
-        getparentinfo();
+        //getparentinfo();
         //invorkmethodbyreflect("com.lpan.java_summarize.base.jdk8.stream.User");
         //getclassload("com.lpan.java_summarize.base.jdk8.stream.User");
-
+        getreflect();
     }
 
     /**内省   算符用于确定一个对象是否属于一个特定的类*/
@@ -158,8 +159,8 @@ public class WhatsReflect {
      *
      * 根据反射获取类的属性与方法
      *
-     * Field() fields() 获取类中定义的公有字段  能访问从其他类继承来的公有方法
-     * DeclaredField()  DeclaredFields()  获取类中定义的所有字段 与public，private protected 无关，不能访问从其他类集成来的属性
+     * Field(String str) fields() 获取类中定义的公有字段  能访问从其他类继承来的公有方法
+     * DeclaredField(String str)  DeclaredFields()  获取类中定义的所有字段 与public，private protected 无关，不能访问从其他类集成来的属性
      *
      * */
     public static void invorkmethodbyclass(String str){
@@ -173,14 +174,19 @@ public class WhatsReflect {
             user.setUsername("zs");
             user.setBirthday("90");
 
-            /** 获取 类的字段*/
+            /**
+             *  域
+             * 获取域  它通过传递一个名称参数来返回一个域。如果域不存在或者不可访问，它会抛出一个异常
+             * */
             Field name = aClass.getField("username");
             /**修改(设置)字段的值*/
             name.set(user,"lisi");
             /**获取字段的值*/
             Object o = name.get(user);
             System.out.println("username is :" + o);
-            /***/
+            /**
+             *  它返回这个类的所有可访问域的数组  也就是定义为public (公共的)
+             * */
             Field[] fields = aClass.getFields();
             Arrays.asList(fields).forEach(field -> {
                 System.out.println(field.getName());
@@ -240,22 +246,35 @@ public class WhatsReflect {
 
     }
 
-    /** 通过Java反射机制调用类方法 */
+    /**
+     *   getMethod(String str)   getMethods()  获取方法 公共的方法
+     *   getDeclaredMethod(String str)  getDeclaredMethods()   获取所有的方法 不论是public private protected
+     *
+     * 通过Java反射机制调用类方法 */
     public static void invorkmethodbyreflect(String str){
         try {
             Class<?> aClass = Class.forName(str);
             User user = (User)aClass.newInstance();
 
             /**调用公有方法*/
-            Method print = aClass.getDeclaredMethod("print");
+            Method print = aClass.getMethod("print");
             Object invoke = print.invoke(user);
             System.out.println(invoke);
-
+            System.out.println("=============================");
+            Method[] methods = aClass.getMethods();
+            Arrays.asList(methods).forEach(method -> {
+                System.out.println("公共的方法: " + method.getName());
+            });
+            System.out.println("=============================");
             /**调用私有方法*/
             Method plusOne = aClass.getDeclaredMethod("plusOne", int.class);
             plusOne.setAccessible(true);
             Object invoke1 = plusOne.invoke(user, 2);
             System.out.println(invoke1);
+            System.out.println("=============================");
+            Method[] declaredMethods = aClass.getDeclaredMethods();
+            Arrays.asList(declaredMethods).forEach(declaredMethod-> System.out.println("所有的方法名: " + declaredMethod.getName()));
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
@@ -276,6 +295,23 @@ public class WhatsReflect {
             /**获取类加载器*/
             String name = aClass.getClassLoader().getClass().getName();
             System.out.println(name);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /***
+     *  获取类上的注解
+     *
+     */
+    public static void getreflect(){
+        String classstr = "com.lpan.java_summarize.common.user.controller.UserController";
+        try {
+            Class<?> aClass = Class.forName(classstr);
+            /** 获取注解 */
+            RequestMapping annotation = aClass.getAnnotation(RequestMapping.class);
+            String[] value = annotation.value();
+            System.out.println(value[0]);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

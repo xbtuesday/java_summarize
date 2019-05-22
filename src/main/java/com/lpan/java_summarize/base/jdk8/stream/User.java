@@ -1,5 +1,8 @@
 package com.lpan.java_summarize.base.jdk8.stream;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j(topic = "shipan")
 public class User {
     private String name;
     private String age;
