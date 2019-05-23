@@ -1,5 +1,6 @@
 package com.lpan.java_summarize.advance.redis;
 
+import com.lpan.java_summarize.utils.logaop.SystemLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -28,6 +29,7 @@ public class RedisCacheUtils {
      * @param str
      * @return void
      */
+    @SystemLog
     public void addString(String key, String str){
         ValueOperations valueOperations = redisTemplate.opsForValue();
         BoundValueOperations boundValueOperations = redisTemplate.boundValueOps(key);
