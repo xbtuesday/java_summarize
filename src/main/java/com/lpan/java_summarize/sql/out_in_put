@@ -1,0 +1,20 @@
+导入导出数据库
+使用命令行：
+mysqldump命令  备份
+
+一、备份一张表：
+格式：mysqldump -h 主机名 -p 端口号 -u 用户名 -p 密码 -d 数据库名 表名 > 脚本名；
+如果不加表名  就是导出整个整个库
+例子：1、备份库中一张表(表结构及数据)
+    mysql -hlocalhost -p6379 -uroot -p java_summarize user > user.sql;
+     2、备份中一张表(仅表结构)
+     mysql -hlocalhost -p6379 -uroot -p -d java_summarize user > user.sql;
+二、如果导出多张表
+格式：mysqldump -h 主机名 -p 端口号 -u 用户名 -p 密码 -d 数据库名 表名1 表名2 .. > 脚本名；
+
+三、备份压缩
+格式：格式：mysqldump -h主机名 -P端口 -u用户名 -p密码 -d 数据库名 | gzip > 文件名.sql.gz
+
+注：
+-d 参数 仅导出表结构  没有-d参数 就是导出表结构及数据
+
