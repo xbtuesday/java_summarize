@@ -1,4 +1,4 @@
-package com.lpan.java_summarize.common;
+package com.lpan.java_summarize.common.mybatispluspractise;
 
 import java.io.Serializable;
 

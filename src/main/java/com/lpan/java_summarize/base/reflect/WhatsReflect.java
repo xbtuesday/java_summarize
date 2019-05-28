@@ -101,7 +101,7 @@ public class WhatsReflect {
     public static void classs(){
         Class<?> classes = null;
         try {
-            classes = Class.forName("com.lpan.java_summarize.common.user.entity.User");
+            classes = Class.forName("com.lpan.java_summarize.common.mybatispluspractise.user.entity.User");
             String packagename = classes.getPackage().getName();
             String classname = classes.getName();
             System.out.println("类的包名：" + packagename + "  类的名称：" + classname);
@@ -223,7 +223,7 @@ public class WhatsReflect {
 
     /**过Java反射机制得到类的一些属性： 继承的接口，父类，函数信息，成员信息，类型等*/
     public static void getparentinfo(){
-        String classstr = "com.lpan.java_summarize.common.user.entity.User";
+        String classstr = "User";
         try {
             Class<?> aClass = Class.forName(classstr);
             /**获取父类*/
@@ -305,7 +305,7 @@ public class WhatsReflect {
      *
      */
     public static void getreflect(){
-        String classstr = "com.lpan.java_summarize.common.user.controller.UserController";
+        String classstr = "UserController";
         try {
             Class<?> aClass = Class.forName(classstr);
             /** 获取注解 */

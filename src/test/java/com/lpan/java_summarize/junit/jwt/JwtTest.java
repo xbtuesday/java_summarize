@@ -1,8 +1,7 @@
-package junit.jwt;
+package com.lpan.java_summarize.junit.jwt;
 
 import com.lpan.java_summarize.jwt.JwtUtils;
 import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -15,7 +14,6 @@ import java.time.ZoneOffset;
  * Version: 1.0
  */
 
-@SpringBootTest
 public class JwtTest {
 
     @Test

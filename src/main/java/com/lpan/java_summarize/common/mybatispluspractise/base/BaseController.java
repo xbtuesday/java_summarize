@@ -1,4 +1,4 @@
-package com.lpan.java_summarize.common.base;
+package com.lpan.java_summarize.common.mybatispluspractise.base;
 
 /**
  * ClassName: BaseController
