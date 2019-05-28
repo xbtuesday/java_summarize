@@ -27,7 +27,9 @@ public class User {
     @Column
     private Integer age;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column
     private LocalDateTime birthday;
+    @Column
     private String address;
 
 }

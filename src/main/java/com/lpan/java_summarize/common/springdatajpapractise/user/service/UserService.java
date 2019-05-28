@@ -27,7 +27,7 @@ public interface UserService {
 
     List<User> findByAge(Integer age);
 
-    List<User> findUser(String name);
+    User findByNameLike(String name);
 
 
 

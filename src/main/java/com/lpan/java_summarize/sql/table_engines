@@ -1,0 +1,9 @@
+1、查看当前数据库支持的存储引擎
+>show engines;
+2、查看当前数据库默认的存储引擎
+>show variables like '%storage_engine%'
+3、查看某张表的存储引擎
+>show create table 表名
+4、修改表的存储引擎
+(1)、直接修改
+>ALTER TABLE my_table ENGINE=InnoDB
