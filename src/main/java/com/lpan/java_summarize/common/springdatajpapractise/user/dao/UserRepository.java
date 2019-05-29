@@ -2,6 +2,7 @@ package com.lpan.java_summarize.common.springdatajpapractise.user.dao;
 
 import com.lpan.java_summarize.common.springdatajpapractise.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * Version: 1.0
  */
 @Repository
-public interface UserRepository extends JpaRepository<User,Integer> {
+public interface UserRepository extends JpaRepository<User,Integer>, JpaSpecificationExecutor {
 
     /**
      * Description  根据年龄查询用户
@@ -38,7 +39,9 @@ public interface UserRepository extends JpaRepository<User,Integer> {
      * @return java.util.List<com.lpan.java_summarize.common.springdatajpapractise.user.model.User>
      */
     @Query(value = "select u from User u where u.name like CONCAT('%',:name,'%')")
-    User findByNameLike(String name);
+    List<User> findByNameLike(String name);
+
+
 
 
 }

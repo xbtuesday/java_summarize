@@ -71,7 +71,7 @@ public class DataSourceConfig {
     }
 
     /** 事务配置 */
-    @Bean("platformTransactionManager")
+    @Bean(name = "transactionManager")
     public PlatformTransactionManager platformTransactionManager(@Qualifier("hikariDataSource") HikariDataSource hikariDataSource,
                                                                  EntityManagerFactory entityManagerFactory){
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();

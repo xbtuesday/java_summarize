@@ -4,8 +4,12 @@ import com.lpan.java_summarize.common.springdatajpapractise.user.dao.UserReposit
 import com.lpan.java_summarize.common.springdatajpapractise.user.model.User;
 import com.lpan.java_summarize.common.springdatajpapractise.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.Predicate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,8 +59,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByNameLike(String name) {
-        User byName = userRepository.findByNameLike(name);
+    public List<User> findByNameLike(String name) {
+        List<User> byName = userRepository.findByNameLike(name);
         return byName;
+    }
+
+    /**
+     *
+     *  jpa 动态sql
+     *
+     * */
+    @Override
+    @Transactional
+    public List<User> findByCondition(String name, Integer age, Integer id) {
+        List<Predicate> list = new ArrayList<>(4);
+        Specification specification = (root,query,criteriaBuilder)->{
+            if (null != id && !"".equals(id)){
+                Predicate name1 = criteriaBuilder.like(root.get("name"), name);
+                list.add(name1);
+            }
+            if (null != age && !"".equals(age)){
+                Predicate age1 = criteriaBuilder.lessThan(root.get("age"), age);
+                list.add(age1);
+            }
+            if (null != age && !"".equals(age)){
+                Predicate id1 = criteriaBuilder.equal(root.get("id"), id);
+                list.add(id1);
+            }
+            Predicate and = criteriaBuilder.or(list.toArray(new Predicate[list.size()]));
+            return and;
+        };
+        List<User> all = userRepository.findAll(specification);
+        return all;
     }
 }

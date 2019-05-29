@@ -45,12 +45,20 @@ public class UserController {
 
     @RequestMapping("/findbyname/{name}")
     public String findlikename(@PathVariable("name") String name){
-        User byAge = userService.findByNameLike(name);
+        List<User> byAge = userService.findByNameLike(name);
         Gson gson = new Gson();
         String s1 = gson.toJson(byAge);
         //User user = byAge.get(0);
         String s = byAge.toString();
         return s1;
+    }
+
+    @RequestMapping("/findByCondition/{name}/{age}/{sex}")
+    public String findByCondition(@PathVariable("name") String name,@PathVariable("age") Integer age,@PathVariable("sex") Integer sex){
+        List<User> byCondition = userService.findByCondition(name, age, sex);
+        Gson gson = new Gson();
+        String s = gson.toJson(byCondition);
+        return s;
     }
 
 
