@@ -28,6 +28,6 @@ HELP.md
 ### VS Code ###
 .vscode/
 
-####涉及密码的配置文件###
-/src/main/resource/application.*
+###涉及密码的配置文件###
+/src/main/resources/application-*.properties
 
