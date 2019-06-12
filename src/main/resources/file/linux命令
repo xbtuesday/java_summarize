@@ -1,0 +1,19 @@
+SSH 上传下载文件
+
+linux下一般是使用scp命令来通过ssh传输文件的
+1、从服务器上下载文件到本地机器
+scp username@servername(serverip):/path/**/filename  /home/lpan/...
+    登录远程机器用户名/远程机器名或ip:/要下载的文件路径     要下载到本地的路径
+
+2、上传本地文件到服务器
+scp  /home/lpan/../filename username@servername(serverip):path/../
+
+3、从服务器下载整个目录
+scp -r username@servername(serverip):/path/**/(远程目录)  /home/lpan/local_dir/(本地目录)
+
+4、上传本地目录到服务器
+
+scp -r /home/lpan/local_dir/ (本地目录)   username@servername(serverip):/path/**/(远程目录)
+
+注： 上述操作需要服务器的相对目录开启写入权限
+
