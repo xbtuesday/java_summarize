@@ -1,1 +1,11 @@
 java IO流
+按输入和输出分：
+    输入流：
+            InputStream(抽象类)
+                |-->    FileInputStream
+                |-->    StringBufferInputStream
+                |-->    ByteArrayInputStream
+                |-->    FilterInputStream
+
+    输出流：
+            OutPutStream
