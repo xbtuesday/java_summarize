@@ -1,11 +1,32 @@
 java IO流
+
+字节流
 按输入和输出分：
     输入流：
-            InputStream(抽象类)
-                |-->    FileInputStream
-                |-->    StringBufferInputStream
+            InputStream(抽象类)  字节输入流基类  字节输入流的所有类的超类
+                |-->    FileInputStream                 字节文件输入流
+                |-->    StringBufferInputStream         字节缓冲输入流  提高了读取效率
                 |-->    ByteArrayInputStream
                 |-->    FilterInputStream
 
     输出流：
-            OutPutStream
+            OutPutStream(抽象类)  字节输出流基类  字节输出流的所有类的超类
+                |-->    FileOutputStream                字节文件输出流  用于将数据写入到File
+                |-->    StringBufferOutputStream        字节缓冲输出流 提高了写出效率
+                |-->    ByteArrayOutputStream
+                |-->    FilterOutputStream
+
+
+字符流
+按输入和输出分：
+       输入流：Reader  读取字符流的抽象类
+                |-->    InputStreamReader           字节流转字符流
+                |-->    BufferedReader              字符缓冲流   从字符输出流中读取文本，缓冲各个字符，从而实现字符数组和字符串的读取
+
+
+
+
+
+       输出流：Writer  写入字符流的抽象类
+                |-->    OutPutStreamWriter          字节流转字符流
+                |-->    BufferedWriter              字符缓冲流   将文本写入字符输出流，缓冲各个字符，提高单个字符，数组和字符串的写入
