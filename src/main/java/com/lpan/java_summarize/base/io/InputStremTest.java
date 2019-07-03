@@ -2,6 +2,7 @@ package com.lpan.java_summarize.base.io;
 
 import org.junit.jupiter.api.Test;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 
 /**
@@ -21,12 +22,10 @@ public class InputStremTest {
             byte []  bytes = new byte[2048];
             int i = 0;
             while((i=fileInputStream.read(bytes))>0){
-
                 String s = new String(bytes,"UTF-8");
                 System.out.println(s);
             }
             int read = fileInputStream.read();
-
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
