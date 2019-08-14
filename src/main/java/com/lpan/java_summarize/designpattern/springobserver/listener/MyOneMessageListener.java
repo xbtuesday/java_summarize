@@ -60,7 +60,6 @@ public class MyOneMessageListener implements SmartApplicationListener {
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
         Object source = event.getSource();
-        logger.info("==================有序监听器One 监听一个event事件==================");
-        logger.info("当前线程："+Thread.currentThread().getName()+"监听内容：" + source);
+        logger.info("==================有序监听器One 监听一个event事件=================="+"当前线程："+Thread.currentThread().getName()+"监听内容：" + source);
     }
 }
