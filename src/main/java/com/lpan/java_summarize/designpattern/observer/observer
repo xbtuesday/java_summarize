@@ -1,11 +1,10 @@
 观察者模式
-观察者模式是事件驱动模型的应用,平时京城遇到的关于事件驱动的应用包括
+观察者模式是事件驱动模型的应用,平时经常遇到的关于事件驱动的应用包括
 1、观察者模式
 2、JDK观察者模式
 3、JavaBean事件驱动
 4、Spring事件驱动
 
 
-
 practise01中 Email服务和Phone服务 都是监听器  监听"异常消息"这一事件 由MyExceptionSubject 产生此事件，当调用MyExceptionSubject#sendMessage("xxx")
-方法发布时间时会 通知所有监听器，即Email服务和Phone服务，他们会根据自己的业务逻辑做相应处理
+方法发布事件时会 通知所有监听器，即Email服务和Phone服务，他们会根据自己的业务逻辑做相应处理
