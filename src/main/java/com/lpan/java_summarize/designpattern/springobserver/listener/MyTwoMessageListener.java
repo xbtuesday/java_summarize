@@ -28,7 +28,7 @@ public class MyTwoMessageListener implements SmartApplicationListener {
      */
     @Override
     public boolean supportsEventType(Class<? extends ApplicationEvent> eventType) {
-        if (MyServiceEvent.class == eventType){
+        if (eventType == MyServiceEvent.class){
             return true;
         }
         return false;
@@ -44,7 +44,10 @@ public class MyTwoMessageListener implements SmartApplicationListener {
      */
     @Override
     public boolean supportsSourceType(Class<?> sourceType) {
-        return true;
+        if (sourceType == String.class){
+            return true;
+        }
+        return false;
     }
 
     /**执行顺序  数字越小 越先被执行*/

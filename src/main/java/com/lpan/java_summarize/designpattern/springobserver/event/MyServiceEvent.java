@@ -16,7 +16,7 @@ public class MyServiceEvent extends ApplicationEvent {
      *
      * @param source the object on which the event initially occurred (never {@code null})
      */
-    public MyServiceEvent(Object source) {
+    public MyServiceEvent(String source) {
         super(source);
     }
 }
