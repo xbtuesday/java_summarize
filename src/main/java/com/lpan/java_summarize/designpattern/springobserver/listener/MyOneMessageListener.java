@@ -1,7 +1,6 @@
 package com.lpan.java_summarize.designpattern.springobserver.listener;
 
 import com.lpan.java_summarize.designpattern.springobserver.event.MyServiceEvent;
-import io.lettuce.core.dynamic.annotation.CommandNaming;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEvent;
