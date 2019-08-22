@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.lpan.java_summarize.common.springdatajpapractise.user.model.User;
 import com.lpan.java_summarize.common.springdatajpapractise.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    //@Autowired
+    //private ApplicationContext applicationContext;
 
     @Autowired
     private UserService userService;

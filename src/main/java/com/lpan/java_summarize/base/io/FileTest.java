@@ -1,7 +1,5 @@
 package com.lpan.java_summarize.base.io;
 
-import org.apache.tomcat.jni.Directory;
-
 import java.io.File;
 
 /**
@@ -20,7 +18,11 @@ public class FileTest {
     }
 
     public static void  direach(){
-        File file = new File("/home/lpan/Documents");
+        File
+                file = new File("/home/lpan/Documents"),
+                dfile = new File("/home/lpam/Download/");
+        file.renameTo(dfile);
+        dfile.list();
         String[] list = file.list(new DirFileFilter(".+(.xlsx|.xls|.pdf|.jpg|.deb)$"));
         for (String filename:list) {
             System.out.println(filename);
