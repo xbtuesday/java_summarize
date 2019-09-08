@@ -13,9 +13,9 @@ import java.util.Arrays;
 public class Sortofinsert {
     public static void main(String[] args) {
         int [] ins = {12,36,45,2,11,8,4,3,24,15,21,32};
-        int [] sortins = sortofinsert(ins);
+        //int [] sortins = sortofinsert(ins);
         int[] myselfinsertsort = myselfinsertsort(ins);
-        System.out.println(Arrays.toString(sortins));
+        //System.out.println(Arrays.toString(sortins));
         System.out.println(Arrays.toString(myselfinsertsort));
     }
 
@@ -45,7 +45,7 @@ public class Sortofinsert {
     public static int[] myselfinsertsort(int[] ints){
         int length = ints.length;
         int temp;
-        for (int i=0;i<length;i++){
+        for (int i=1;i<length;i++){
             /**将要比较的数 赋值给临时变量*/
             temp = ints[i];
             /**要比较的元素位置的前面一个位置  要比较的数的前面的数 都是排好序的*/
