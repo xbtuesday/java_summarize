@@ -1,8 +1,7 @@
 package com.lpan.java_summarize.common.user.mapper;
 
-import com.lpan.java_summarize.common.user.entity.User;
+import com.lpan.java_summarize.common.user.model.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>

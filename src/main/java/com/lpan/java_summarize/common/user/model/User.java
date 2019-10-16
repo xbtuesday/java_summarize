@@ -1,4 +1,4 @@
-package com.lpan.java_summarize.common.user.entity;
+package com.lpan.java_summarize.common.user.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

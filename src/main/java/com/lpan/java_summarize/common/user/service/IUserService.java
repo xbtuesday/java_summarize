@@ -1,6 +1,6 @@
 package com.lpan.java_summarize.common.user.service;
 
-import com.lpan.java_summarize.common.user.entity.User;
+import com.lpan.java_summarize.common.user.model.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

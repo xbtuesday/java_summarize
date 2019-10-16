@@ -2,7 +2,7 @@ package com.lpan.java_summarize.common.user.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.lpan.java_summarize.common.user.entity.User;
+import com.lpan.java_summarize.common.user.model.User;
 import com.lpan.java_summarize.common.user.service.IUserService;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;

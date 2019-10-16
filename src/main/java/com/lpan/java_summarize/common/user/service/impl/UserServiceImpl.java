@@ -1,7 +1,7 @@
 package com.lpan.java_summarize.common.user.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.lpan.java_summarize.common.user.entity.User;
+import com.lpan.java_summarize.common.user.model.User;
 import com.lpan.java_summarize.common.user.mapper.UserMapper;
 import com.lpan.java_summarize.common.user.service.IUserService;
 import org.springframework.stereotype.Service;

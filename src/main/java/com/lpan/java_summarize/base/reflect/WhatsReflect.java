@@ -101,7 +101,7 @@ public class WhatsReflect {
     public static void classs(){
         Class<?> classes = null;
         try {
-            classes = Class.forName("com.lpan.java_summarize.common.user.entity.User");
+            classes = Class.forName("com.lpan.java_summarize.common.user.model.User");
             String packagename = classes.getPackage().getName();
             String classname = classes.getName();
             System.out.println("类的包名：" + packagename + "  类的名称：" + classname);
