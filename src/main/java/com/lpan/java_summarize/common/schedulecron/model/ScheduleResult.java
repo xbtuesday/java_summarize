@@ -9,18 +9,16 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-@TableName("spring_cron_schedule")
-public class CronScheduled {
+@TableName("spring_schedule_result")
+public class ScheduleResult {
 
-    @TableId(value = "id",type = IdType.AUTO)
+    @TableId(value = "id",type= IdType.AUTO)
     private Integer id;
     private String taskName;
     private String taskCode;
-    private String taskClass;
-    private String autoStartUp;
-    private String cronExpression;
-    private String taskMessage;
-    private LocalDateTime createTime;
-    private LocalDateTime updateTime;
+    private String result;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private String detailMessage;
     private String status;
 }

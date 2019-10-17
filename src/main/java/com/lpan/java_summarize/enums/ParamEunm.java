@@ -2,7 +2,11 @@ package com.lpan.java_summarize.enums;
 
 public enum ParamEunm {
 
-    NOTNULL("00","此参数不能为空")
+    NOTNULL("00","此参数不能为空"),
+    AUTOSATRT("1","自动重启"),
+    DISAUTOSTART("0","不自动重启"),
+    ENABLE("1","可用状态"),
+    DISABLED("0","不可用状态")
     ;
 
 

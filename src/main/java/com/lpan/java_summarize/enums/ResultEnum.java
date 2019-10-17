@@ -3,7 +3,8 @@ package com.lpan.java_summarize.enums;
 public enum ResultEnum {
 
     SUCCESS("0000","成功"),
-    FAILD("9999","异常")
+    FAILD("9999","异常"),
+    EXISTS("1999","已存在")
     ;
 
     private String code;

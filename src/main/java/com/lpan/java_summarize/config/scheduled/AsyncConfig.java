@@ -1,4 +1,4 @@
-package com.lpan.java_summarize.config;
+package com.lpan.java_summarize.config.scheduled;
 
 
 import org.springframework.context.annotation.Bean;
