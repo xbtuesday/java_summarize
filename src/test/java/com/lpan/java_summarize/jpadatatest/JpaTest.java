@@ -1,8 +1,6 @@
 package com.lpan.java_summarize.jpadatatest;
 
 import com.lpan.java_summarize.BaseTest;
-import com.lpan.java_summarize.common.springdatajpapractise.user.dao.UserRepository;
-import com.lpan.java_summarize.common.springdatajpapractise.user.model.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,15 +15,15 @@ import java.util.List;
  */
 public class JpaTest extends BaseTest {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Test
-    public String getbyage(){
-        List<User> users = userRepository.findByAge(18);
-        User user = users.get(0);
-        return user.toString();
-    }
+//    @Autowired
+//    private UserRepository userRepository;
+//
+//    @Test
+//    public String getbyage(){
+//        List<User> users = userRepository.findByAge(18);
+//        User user = users.get(0);
+//        return user.toString();
+//    }
 
 
 
