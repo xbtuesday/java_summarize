@@ -1,12 +1,19 @@
 package com.lpan.java_summarize.designpattern.springobserver.listener;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.lpan.java_summarize.common.schedulecron.model.CronScheduled;
+import com.lpan.java_summarize.common.schedulecron.service.CronScheduledService;
 import com.lpan.java_summarize.designpattern.springobserver.event.MyServiceEvent;
+import javafx.concurrent.ScheduledService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * ClassName: MyMessageListener  定义一个 监听器 监听事件
@@ -28,6 +35,9 @@ import org.springframework.stereotype.Component;
 public class MyMessageListener implements ApplicationListener<ApplicationEvent> {
 
     private Logger logger = LoggerFactory.getLogger(MyMessageListener.class);
+
+    @Autowired
+    CronScheduledService cronScheduledService;
 
     @Async
     @Override

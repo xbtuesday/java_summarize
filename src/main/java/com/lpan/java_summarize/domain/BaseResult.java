@@ -24,4 +24,18 @@ public class BaseResult {
         }
         return baseResponse;
     }
+
+    public static BaseResponse faild(String code,String message) {
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setCode(code);
+        baseResponse.setMessage(message);
+        return baseResponse;
+    }
+
+    public static BaseResponse result(ResultEnum resultEnum){
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setCode(resultEnum.getCode());
+        baseResponse.setMessage(resultEnum.getMessage());
+        return baseResponse;
+    }
 }

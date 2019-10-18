@@ -12,15 +12,18 @@ import com.lpan.java_summarize.domain.BaseResult;
 import com.lpan.java_summarize.enums.ParamEunm;
 import com.lpan.java_summarize.enums.ResultEnum;
 import com.lpan.java_summarize.utils.SpringUtils;
+import org.quartz.CronExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.config.TriggerTask;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import javax.xml.transform.Result;
+import java.time.LocalDateTime;
 
 @Service
 public class CronScheduledServiceImpl extends ServiceImpl<CronScheduledMapper, CronScheduled> implements CronScheduledService{
@@ -53,21 +56,27 @@ public class CronScheduledServiceImpl extends ServiceImpl<CronScheduledMapper, C
     }
 
 
+    @Transactional
     public BaseResponse saveTask(CronScheduled cronScheduled) throws Exception {
         Assert.notNull(cronScheduled.getAutoStartUp(), ParamEunm.NOTNULL.getMessage());
         BaseResponse baseResponse = new BaseResponse();
         CronScheduled cronScheduled1 = new CronScheduled();
         cronScheduled1.setTaskCode(cronScheduled.getTaskCode());
-        QueryWrapper queryWrapper = buildWrapper(cronScheduled1);
-        Integer integer = baseMapper.selectCount(queryWrapper);
-        if (integer >=1){
-            baseResponse.setCode(ResultEnum.EXISTS.getCode());
-            baseResponse.setMessage(ResultEnum.EXISTS.getMessage());
-            return baseResponse;
-        }
-        baseMapper.insert(cronScheduled);
-        if (cronScheduled.getAutoStartUp().equals(ParamEunm.AUTOSATRT.getCode())){
-            baseResponse = startTask(cronScheduled);
+        boolean validExpression = CronExpression.isValidExpression(cronScheduled.getCronExpression());
+        if (validExpression){
+            QueryWrapper queryWrapper = buildWrapper(cronScheduled1);
+            Integer integer = baseMapper.selectCount(queryWrapper);
+            if (integer >= 1){
+                return BaseResult.result(ResultEnum.EXISTS);
+            }
+            cronScheduled.setCreateTime(LocalDateTime.now());
+            cronScheduled.setStatus(ParamEunm.ENABLE.getCode());
+            baseMapper.insert(cronScheduled);
+            if (cronScheduled.getAutoStartUp().equals(ParamEunm.AUTOSATRT.getCode())){
+                baseResponse = startTask(cronScheduled);
+            }
+        }else{
+            return BaseResult.result(ResultEnum.CRONEXPRESSERROR);
         }
         return baseResponse;
     }
@@ -78,6 +87,10 @@ public class CronScheduledServiceImpl extends ServiceImpl<CronScheduledMapper, C
         if (b){
             throw new Exception("该任务已启动");
         }
+        /**修改数据库中定时任务状态*/
+        cronScheduled.setStatus(ParamEunm.ENABLE.getCode());
+        baseMapper.updateById(cronScheduled);
+        /**开启定时任务*/
         DynamicScheduledTask dynamicScheduledTask = (DynamicScheduledTask) SpringUtils.getBean(Class.forName(cronScheduled.getTaskClass()));
         boolean inited = dynamicScheduledConfig.inited();
         if (!inited){
@@ -93,6 +106,7 @@ public class CronScheduledServiceImpl extends ServiceImpl<CronScheduledMapper, C
      * @param cronScheduled
      * @return
      */
+    @Transactional
     @Override
     public BaseResponse reset(CronScheduled cronScheduled) throws Exception {
         BaseResponse baseResponse = new BaseResponse();
@@ -108,15 +122,18 @@ public class CronScheduledServiceImpl extends ServiceImpl<CronScheduledMapper, C
         return baseResponse;
     }
 
+    @Transactional
     @Override
     public BaseResponse stop(Integer id) {
         QueryWrapper<CronScheduled> queryWrapper = new QueryWrapper<>();
         CronScheduled cronScheduled = baseMapper.selectById(id);
+        /**移除定时任务*/
+        dynamicScheduledConfig.removeTask(cronScheduled.getTaskCode());
+        /**修改数据库*/
         cronScheduled.setStatus(ParamEunm.DISABLED.getCode());
         queryWrapper.eq("id",cronScheduled.getId());
         baseMapper.update(cronScheduled,queryWrapper);
-        /**移除定时任务*/
-        dynamicScheduledConfig.removeTask(cronScheduled.getTaskCode());
+
         return BaseResult.success(true);
     }
 }

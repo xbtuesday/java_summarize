@@ -4,7 +4,14 @@ public enum ResultEnum {
 
     SUCCESS("0000","成功"),
     FAILD("9999","异常"),
-    EXISTS("1999","已存在")
+
+
+    EXISTS("8999","该定时任务已存在"),
+
+
+
+
+    CRONEXPRESSERROR("8899","Cron 表达式正确")
     ;
 
     private String code;

@@ -85,8 +85,7 @@ public class CronScheduledController {
             CronScheduled cronScheduled = cronScheduledService.getById(id);
             baseResponse = cronScheduledService.startTask(cronScheduled);
         }catch (Exception e){
-            baseResponse.setCode(ResultEnum.FAILD.getCode());
-            baseResponse.setMessage(ResultEnum.FAILD.getMessage());
+           return BaseResult.result(ResultEnum.FAILD);
         }
         return baseResponse;
     }
@@ -122,8 +121,8 @@ public class CronScheduledController {
         Assert.notNull(id, ParamEunm.NOTNULL.getMessage());
         CronScheduled cronScheduled = cronScheduledService.getById(id);
         try{
-            ScheduleTask scheduleTask = (ScheduleTask) SpringUtils.getBean(Class.forName(cronScheduled.getTaskClass()));
-            scheduleTask.executeTask();
+            DynamicScheduledTask scheduleTask = (DynamicScheduledTask) SpringUtils.getBean(Class.forName(cronScheduled.getTaskClass()));
+            scheduleTask.executDynmicTask();
         }catch (ClassNotFoundException e){
             e.printStackTrace();
         }

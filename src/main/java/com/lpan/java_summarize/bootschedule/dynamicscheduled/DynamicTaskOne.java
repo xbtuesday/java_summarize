@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DynamicTaskOne implements DynamicScheduledTask {
 
-    Logger logger = LoggerFactory.getLogger(DynamicPrintTask.class);
+    Logger logger = LoggerFactory.getLogger(DynamicTaskOne.class);
 
     @Override
     public void executDynmicTask() {
