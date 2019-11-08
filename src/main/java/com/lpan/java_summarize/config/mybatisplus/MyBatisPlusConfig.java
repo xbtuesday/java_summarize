@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 /**
- * @author liwei
+ * @author lpan
  * @date 2019/2/27 1:59 PM
  */
 @Configuration

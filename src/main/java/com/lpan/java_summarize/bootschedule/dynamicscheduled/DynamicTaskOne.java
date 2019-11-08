@@ -1,6 +1,5 @@
 package com.lpan.java_summarize.bootschedule.dynamicscheduled;
 
-import com.lpan.java_summarize.bootschedule.advance.DynamicPrintTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
